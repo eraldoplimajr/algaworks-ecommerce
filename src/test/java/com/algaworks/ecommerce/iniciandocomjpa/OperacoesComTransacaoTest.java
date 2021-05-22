@@ -16,6 +16,20 @@ import com.algaworks.ecommerce.model.Produto;
 public class OperacoesComTransacaoTest extends EntityManagerTest{
 	
 	@Test
+	public void removerObjeto() {
+		Produto produto = entityManager.find(Produto.class, 3);
+		
+		entityManager.getTransaction().begin();
+		entityManager.remove(produto);
+		entityManager.getTransaction().commit();
+		
+//		entityManager.clear(); não é necessário, pois o remove também limpa da memória do entityManager
+		
+		Produto produtoVerificacao = entityManager.find(Produto.class, produto.getId());
+		Assert.assertNull(produtoVerificacao);
+	}
+	
+	@Test
 	public void inserirOPrimeiroObjeto() {
 		
 		Produto produto = new Produto();
