@@ -36,7 +36,7 @@ public class OperacoesComTransacaoTest extends EntityManagerTest{
 		
 		produtoPersist.setId(5);
 		produtoPersist.setNome("SmartPhone One Plus");
-		produtoPersist.setDescicao("O processador mais rápido.");
+		produtoPersist.setDescricao("O processador mais rápido.");
 		produtoPersist.setPreco(new BigDecimal(2000));
 		
 		entityManager.getTransaction().begin();
@@ -52,7 +52,7 @@ public class OperacoesComTransacaoTest extends EntityManagerTest{
 		Produto produtoMerge = new Produto();
 		produtoMerge.setId(6);
 		produtoMerge.setNome("Notebook Dell");
-		produtoMerge.setDescicao("O melhor da categoria");
+		produtoMerge.setDescricao("O melhor da categoria");
 		produtoMerge.setPreco(new BigDecimal(5000));
 		
 		entityManager.getTransaction().begin();
@@ -70,7 +70,7 @@ public class OperacoesComTransacaoTest extends EntityManagerTest{
 		Produto produto = new Produto();
 		produto.setId(4);
 		produto.setNome("Microfone Rode Videmic");
-		produto.setDescicao("A melhor qualidade de som");
+		produto.setDescricao("A melhor qualidade de som");
 		produto.setPreco(new BigDecimal(1000));
 		
 		entityManager.getTransaction().begin();
@@ -104,7 +104,7 @@ public class OperacoesComTransacaoTest extends EntityManagerTest{
 		
 		produto.setId(1);
 		produto.setNome("Kindle Paperwhite");
-		produto.setDescicao("Concheça o novo kindle");
+		produto.setDescricao("Concheça o novo kindle");
 		produto.setPreco(new BigDecimal(599));
 		
 		entityManager.getTransaction().begin();
@@ -138,7 +138,7 @@ public class OperacoesComTransacaoTest extends EntityManagerTest{
 		Produto produto = new Produto();
 		produto.setId(2);
 		produto.setNome("Câmera Canon");
-		produto.setDescicao("A melhor definição para suas fotos.");
+		produto.setDescricao("A melhor definição para suas fotos.");
 		produto.setPreco(new BigDecimal(5000));
 		
 		entityManager.getTransaction().begin();
