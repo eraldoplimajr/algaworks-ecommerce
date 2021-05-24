@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -26,7 +27,10 @@ public class Categoria {
 	
 	@EqualsAndHashCode.Include
 	@Id
-	@GeneratedValue (strategy = GenerationType.SEQUENCE, generator = "seq")
+	@GeneratedValue (strategy = GenerationType.TABLE, generator = "tabela")
+	@TableGenerator(name = "tabela", table = "table_hibernate_sequences",
+					pkColumnName = "sequence_name", pkColumnValue = "categoria",
+					valueColumnName = "next_val")
 	@SequenceGenerator(name = "seq", sequenceName = "sequencia_chave_primaria")
 	private Integer id;
 	
