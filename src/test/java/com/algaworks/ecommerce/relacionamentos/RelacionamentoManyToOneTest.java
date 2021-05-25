@@ -8,7 +8,9 @@ import org.junit.Test;
 
 import com.algaworks.ecommerce.EntityManagerTest;
 import com.algaworks.ecommerce.model.Cliente;
+import com.algaworks.ecommerce.model.ItemPedido;
 import com.algaworks.ecommerce.model.Pedido;
+import com.algaworks.ecommerce.model.Produto;
 import com.algaworks.ecommerce.model.StatusPedido;
 
 /**
@@ -29,15 +31,25 @@ public class RelacionamentoManyToOneTest extends EntityManagerTest{
 		
 		pedido.setCliente(cliente);
 		
+		ItemPedido itemPedido = new ItemPedido();
+		itemPedido.setPrecoProduto(new BigDecimal(499));
+		itemPedido.setQuantidade(1);
+		
+		Produto produto = entityManager.find(Produto.class, 1);
+		
+		itemPedido.setProduto(produto);		
+		itemPedido.setPedido(pedido);
+		
 		entityManager.getTransaction().begin();
 		entityManager.persist(pedido);
+		entityManager.persist(itemPedido);
 		entityManager.getTransaction().commit();
 		
 		entityManager.clear();
 		
-		Pedido pedidoVerificacao = entityManager.find(Pedido.class, pedido.getId());
-		Assert.assertNotNull(pedidoVerificacao);
-		Assert.assertNotNull(pedidoVerificacao.getCliente());
+		ItemPedido itemPedidoVerificacao = entityManager.find(ItemPedido.class, pedido.getId());
+		Assert.assertNotNull(itemPedidoVerificacao);
+		Assert.assertNotNull(itemPedidoVerificacao.getPedido());
+		Assert.assertNotNull(itemPedidoVerificacao.getProduto());
 	}
-
 }
