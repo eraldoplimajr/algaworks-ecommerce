@@ -7,7 +7,7 @@ package com.algaworks.ecommerce.model;
  */
 public enum StatusPedido {
 	
-	AGUARDADNDO,
+	AGUARDANDO,
 	CANCELADO,
 	PAGO
 	
