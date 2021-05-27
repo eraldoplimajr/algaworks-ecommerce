@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.EqualsAndHashCode;
@@ -22,7 +24,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "notafiscal")
+@Table(name = "nota_fiscal")
 public class NotaFiscal {
 	
 	@EqualsAndHashCode.Include
@@ -30,8 +32,9 @@ public class NotaFiscal {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(name = "pedido_id")
-	private Integer pedidoId;
+	@OneToOne
+	@JoinColumn(name = "pedido_id")
+	private Pedido pedido;
 	
 	private String xml;
 	
