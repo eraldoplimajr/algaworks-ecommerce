@@ -14,7 +14,7 @@ import com.algaworks.ecommerce.model.Produto;
  * @author Eraldo Lima
  *
  */
-public class RelacionamentoManyToMany extends EntityManagerTest{
+public class RelacionamentoManyToManyTest extends EntityManagerTest{
 	
 	@Test
 	public void verificarRelacionamento() {
