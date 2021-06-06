@@ -16,6 +16,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PostLoad;
+import javax.persistence.PostPersist;
+import javax.persistence.PostRemove;
+import javax.persistence.PostUpdate;
+import javax.persistence.PrePersist;
+import javax.persistence.PreRemove;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import lombok.EqualsAndHashCode;
@@ -46,8 +53,11 @@ public class Pedido {
 	@OneToMany(mappedBy = "pedido")
 	private List<ItemPedido> listaItemPedido;
 	
-	@Column(name = "data_pedido")
-	private LocalDateTime dataPedido;
+	@Column(name = "data_criacao")
+	private LocalDateTime dataCriacao;
+	
+	@Column(name = "data_ultima_atualizacao")
+	private LocalDateTime dataUltimaAtualizacao;
 	
 	@Column(name = "data_conclusao")
 	private LocalDateTime dataConclusao;
@@ -65,4 +75,44 @@ public class Pedido {
 	
 	@Embedded
 	private EnderecoEntregaPedido enderecoEntrega;
+	
+//	@PrePersist
+//	@PreUpdate
+	public void calcularTotal() {
+		if(listaItemPedido != null) {
+			total = listaItemPedido.stream().map(ItemPedido::getPrecoProduto).reduce(BigDecimal.ZERO, BigDecimal::add);
+		}
+	}
+	
+	@PrePersist
+	public void aoPersistir() {
+		dataCriacao = LocalDateTime.now();
+		calcularTotal();
+	}
+	
+	@PreUpdate
+	public void aoAtualizar() {
+		dataUltimaAtualizacao = LocalDateTime.now();
+		calcularTotal();
+	}
+	
+	@PostUpdate
+	public void aposAtualizar() {
+		System.out.println("Após atualizar o pedido");
+	}
+	
+	@PreRemove
+	public void aoRemover() {
+		System.out.println("Antes de remover o pedido");
+	}
+	
+	@PostRemove
+	public void aposRemover() {
+		System.out.println("Após remover o pedido");
+	}
+	
+	@PostLoad
+	public void aoCarregar() {
+		System.out.println("Após carregar o pedido");
+	}
 }
