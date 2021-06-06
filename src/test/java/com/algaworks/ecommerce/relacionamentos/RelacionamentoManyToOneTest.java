@@ -1,6 +1,5 @@
 package com.algaworks.ecommerce.relacionamentos;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import org.junit.Assert;
@@ -42,8 +41,9 @@ public class RelacionamentoManyToOneTest extends EntityManagerTest{
 		itemPedido.setPrecoProduto(produto.getPreco());
 		itemPedido.setQuantidade(1);
 		
-		itemPedido.setProdutoId(produto.getId());
-		itemPedido.setPedidoId(pedido.getId());
+//		itemPedido.setPedidoId(pedido.getId()); 	IdClass
+//		itemPedido.setProdutoId(produto.getId());	IdClass
+		itemPedido.setId(new ItemPedidoId(pedido.getId(), produto.getId()));
 
 		itemPedido.setPedido(pedido);
 		itemPedido.setProduto(produto);		
