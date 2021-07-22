@@ -10,7 +10,6 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -23,9 +22,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @DiscriminatorColumn(name = "tipo_pagamento", discriminatorType = DiscriminatorType.STRING)
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Entity
-@Table(name = "pagamento")
+//@Table(name = "pagamento")
 public abstract class Pagamento extends EntidadeBaseInteger {
 	
 	@MapsId
