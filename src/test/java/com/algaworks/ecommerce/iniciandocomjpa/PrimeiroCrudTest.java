@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import com.algaworks.ecommerce.EntityManagerTest;
 import com.algaworks.ecommerce.model.Cliente;
+import com.algaworks.ecommerce.model.SexoCliente;
 
 /**
  *
@@ -24,6 +25,8 @@ public class PrimeiroCrudTest extends EntityManagerTest{
 	public void inserirRegistro() {
 		Cliente cliente = new Cliente();		
 		cliente.setNome("Eraldo Lima");
+		cliente.setCpf("333.333.333-33");
+		cliente.setSexo(SexoCliente.MASCULINO);
 		
 		entityManager.getTransaction().begin();
 		entityManager.persist(cliente);

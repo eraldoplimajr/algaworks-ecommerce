@@ -4,6 +4,9 @@ insert into Produto (id, nome, preco, data_criacao, descricao) values (3, 'Câme
 insert into Cliente (id, nome, cpf) values (1, 'Fernando Medeiros', '111.111.111-11');
 insert into Cliente (id, nome, cpf) values (2, 'Marcos Mariano', '222.222.222-22');
 
+insert into cliente_detalhe (cliente_id, sexo, data_nascimento) values (1, 'MASCULINO', date_sub(sysdate(), interval 27 year) );
+insert into cliente_detalhe (cliente_id, sexo, data_nascimento) values (2, 'MASCULINO', date_sub(sysdate(), interval 30 year) );
+
 insert into pedido (id, cliente_id, data_criacao, total, status) values (1, 1, sysdate(), 998.0, 'AGUARDANDO');
 insert into pedido (id, cliente_id, data_criacao, total, status) values (2, 1, sysdate(), 499.0, 'AGUARDANDO');
 

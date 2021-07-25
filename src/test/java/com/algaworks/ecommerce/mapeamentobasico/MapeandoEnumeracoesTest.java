@@ -20,6 +20,7 @@ public class MapeandoEnumeracoesTest extends EntityManagerTest{
 		
 		cliente.setNome("José Mineiro");
 		cliente.setSexo(SexoCliente.MASCULINO);
+		cliente.setCpf("555.555.555-55");
 		
 		entityManager.getTransaction().begin();
 		entityManager.persist(cliente);

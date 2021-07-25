@@ -1,6 +1,7 @@
 package com.algaworks.ecommerce.conhecendoentitymanager;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import org.junit.Test;
 
@@ -25,12 +26,14 @@ public class ContextoDePersistenciaTest extends EntityManagerTest {
         produto2.setNome("Caneca para café");
         produto2.setPreco(new BigDecimal(10.0));
         produto2.setDescricao("Boa caneca para café");
+        produto2.setDataCriacao(LocalDateTime.now());
         entityManager.persist(produto2);
 
         Produto produto3 = new Produto();
         produto3.setNome("Caneca para chá");
         produto3.setPreco(new BigDecimal(10.0));
         produto3.setDescricao("Boa caneca para chá");
+        produto3.setDataCriacao(LocalDateTime.now());
         produto3 = entityManager.merge(produto3);
 
         entityManager.flush();

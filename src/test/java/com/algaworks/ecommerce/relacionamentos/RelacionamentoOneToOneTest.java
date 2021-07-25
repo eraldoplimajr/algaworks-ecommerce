@@ -26,6 +26,7 @@ public class RelacionamentoOneToOneTest extends EntityManagerTest{
 		pagamentoCartao.setStatus(StatusPagamento.PROCESSANDO);
 		pagamentoCartao.setPedido(pedido);
 		
+		
 		entityManager.getTransaction().begin();
 		entityManager.persist(pagamentoCartao);
 		entityManager.getTransaction().commit();
