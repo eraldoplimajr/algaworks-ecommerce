@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.algaworks.ecommerce.EntityManagerTest;
+import com.algaworks.ecommerce.model.Categoria;
 import com.algaworks.ecommerce.model.Cliente;
 import com.algaworks.ecommerce.model.ItemPedido;
 import com.algaworks.ecommerce.model.ItemPedidoId;
@@ -22,6 +23,30 @@ import com.algaworks.ecommerce.model.StatusPedido;
  *
  */
 public class CascadeTypePersistTest extends EntityManagerTest {
+	
+	@Test
+	public void persistirProdutoComCategoria() {
+		Produto produto = new Produto();
+		produto.setDataCriacao(LocalDateTime.now());
+		produto.setPreco(BigDecimal.TEN);
+		produto.setNome("Fones de ouvido");
+		produto.setDescricao("A melhor qualidade de som");
+		
+		Categoria categoria = new Categoria();
+		categoria.setNome("Informática");
+		
+		produto.setCategorias(Arrays.asList(categoria));	// CascadeType.PERSIST
+		
+		entityManager.getTransaction().begin();
+		entityManager.persist(produto);
+		entityManager.getTransaction().commit();
+		
+		entityManager.clear();
+				
+		Produto produtoVerificacao = entityManager.find(Produto.class, produto.getId());
+		Assert.assertNotNull(produtoVerificacao);
+		Assert.assertFalse(produtoVerificacao.getCategorias().isEmpty());
+	}
 	
 	@Test
 	public void persistirPedidoComItens() {
