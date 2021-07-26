@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import com.algaworks.ecommerce.EntityManagerTest;
 import com.algaworks.ecommerce.model.Categoria;
@@ -24,7 +23,7 @@ import com.algaworks.ecommerce.model.StatusPedido;
  */
 public class CascadeTypePersistTest extends EntityManagerTest {
 	
-	@Test
+//	@Test
 	public void persistirProdutoComCategoria() {
 		Produto produto = new Produto();
 		produto.setDataCriacao(LocalDateTime.now());
@@ -48,7 +47,7 @@ public class CascadeTypePersistTest extends EntityManagerTest {
 		Assert.assertFalse(produtoVerificacao.getCategorias().isEmpty());
 	}
 	
-	@Test
+//	@Test
 	public void persistirPedidoComItens() {
 		Cliente cliente = entityManager.find(Cliente.class, 1);
 		Produto produto = entityManager.find(Produto.class, 1);
@@ -80,7 +79,7 @@ public class CascadeTypePersistTest extends EntityManagerTest {
 		
 	}
 	
-	@Test
+//	@Test
 	public void persistirItemPedidoComPedido() {
 		Cliente cliente = entityManager.find(Cliente.class, 1);
 		Produto produto = entityManager.find(Produto.class, 1);
@@ -110,7 +109,7 @@ public class CascadeTypePersistTest extends EntityManagerTest {
 		
 	}
 	
-	@Test
+//	@Test
 	public void persistirPedidoComCliente() {
 		Cliente cliente = new Cliente();
 		cliente.setSexo(SexoCliente.MASCULINO);
