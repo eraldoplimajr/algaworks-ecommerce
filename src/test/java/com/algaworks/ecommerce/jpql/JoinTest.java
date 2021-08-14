@@ -28,5 +28,17 @@ public class JoinTest extends EntityManagerTest {
 		Assert.assertTrue(lista.size() == 1);
 		
 	}
+	
+	@Test
+	public void fazerLeftJoin() {
+		
+		String jpql = "select p from Pedido p left join p.pagamento pag";
+		
+		TypedQuery<Pedido> typedQuery = entityManager.createQuery(jpql, Pedido.class);
+		List<Pedido> lista = typedQuery.getResultList();
+		
+		Assert.assertTrue(lista.size() == 2);
+		
+	}
 
 }
