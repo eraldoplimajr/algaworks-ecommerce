@@ -1,6 +1,7 @@
 package com.algaworks.ecommerce.jpql;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.TypedQuery;
@@ -61,6 +62,19 @@ public class ExpressoesCondicionaisTest extends EntityManagerTest{
 		TypedQuery<Object[]> typedQuery = entityManager.createQuery(jpql, Object[].class);
 		typedQuery.setParameter("precoInicial", new BigDecimal(400));
 		typedQuery.setParameter("precoFinal", new BigDecimal(1500));
+		
+		List<Object[]> lista = typedQuery.getResultList();
+		
+		Assert.assertFalse(lista.isEmpty());
+		
+	}
+	
+	@Test
+	public void usarMaiorMenorComDatas() {
+		String jpql = "select p from Pedido p where p.dataCriacao >= :data";
+		
+		TypedQuery<Object[]> typedQuery = entityManager.createQuery(jpql, Object[].class);
+		typedQuery.setParameter("data", LocalDateTime.now().minusDays(2));
 		
 		List<Object[]> lista = typedQuery.getResultList();
 		
