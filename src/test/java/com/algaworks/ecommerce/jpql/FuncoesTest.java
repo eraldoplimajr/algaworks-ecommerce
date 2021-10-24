@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.algaworks.ecommerce.EntityManagerTest;
+import com.algaworks.ecommerce.model.Pedido;
 
 /**
  *
@@ -15,6 +16,18 @@ import com.algaworks.ecommerce.EntityManagerTest;
  *
  */
 public class FuncoesTest extends EntityManagerTest{
+	
+	@Test
+	public void aplicarFuncaoNativas() {		
+		String jpql = "select p from Pedido p where function('acima_media_faturamento', p.total) = 1";
+		
+		TypedQuery<Pedido> typedQuery = entityManager.createQuery(jpql, Pedido.class);
+		
+		List<Pedido> lista = typedQuery.getResultList();		
+		Assert.assertFalse(lista.isEmpty());
+		
+		lista.forEach(obj -> System.out.println(obj));
+	}
 	
 	@Test
 	public void aplicarFuncaoColecao() {
