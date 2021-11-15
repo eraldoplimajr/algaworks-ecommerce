@@ -18,6 +18,20 @@ import com.algaworks.ecommerce.model.Pedido;
 public class FuncoesTest extends EntityManagerTest{
 	
 	@Test
+	public void aplicarFuncaoAgregacao() {
+//		avg, count, min, max, sum
+		
+		String jpql = "select sum(p.total) from Pedido p";
+		
+		TypedQuery<Number> typedQuery = entityManager.createQuery(jpql, Number.class);
+		
+		List<Number> lista = typedQuery.getResultList();
+		Assert.assertFalse(lista.isEmpty());
+		
+		lista.forEach(obj -> System.out.println(obj));
+	}
+	
+	@Test
 	public void aplicarFuncaoNativas() {		
 		String jpql = "select p from Pedido p where function('acima_media_faturamento', p.total) = 1";
 		
