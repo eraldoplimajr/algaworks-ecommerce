@@ -9,6 +9,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.algaworks.ecommerce.EntityManagerTest;
+import com.algaworks.ecommerce.model.Cliente;
 import com.algaworks.ecommerce.model.Pedido;
 
 /**
@@ -17,6 +18,23 @@ import com.algaworks.ecommerce.model.Pedido;
  *
  */
 public class BasicoCriteriaTest extends EntityManagerTest {
+	
+	@Test
+	public void selecionarUmAtributoParaRetorno() {
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Cliente> criteriaQuery = criteriaBuilder.createQuery(Cliente.class);
+		Root<Cliente> root = criteriaQuery.from(Cliente.class);
+		
+		criteriaQuery.select(root);
+		
+		criteriaQuery.where(criteriaBuilder.equal(root.get("id"), 1));
+		
+		TypedQuery<Cliente> typedQuery = entityManager.createQuery(criteriaQuery);
+		
+		Cliente cliente = typedQuery.getSingleResult();
+		
+		Assert.assertEquals("Fernando Medeiros", cliente.getNome());		
+	}
 	
 	@Test
 	public void buscarPorIdentificador() {
