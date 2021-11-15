@@ -22,6 +22,10 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.br.CPF;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -46,9 +50,11 @@ public class Cliente extends EntidadeBaseInteger{
 	private String nome;
 	
 	@NotBlank
+	@CPF
 	@Column(length = 14, nullable = false)
 	private String cpf;
 	
+	@NotEmpty
 	@ElementCollection
 	@CollectionTable(name = "cliente_contato",
 					 joinColumns = @JoinColumn(name = "cliente_id", foreignKey = @ForeignKey(name = "fk_cliente_contato_cliente")))
@@ -59,6 +65,7 @@ public class Cliente extends EntidadeBaseInteger{
 	@Transient
 	private String primeiroNome;
 	
+	@NotNull
 	@Column(table = "cliente_detalhe", length = 30, nullable = false)
 	@Enumerated(EnumType.STRING)
 	private SexoCliente sexo;

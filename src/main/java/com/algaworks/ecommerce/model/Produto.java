@@ -18,6 +18,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Positive;
 
 import com.algaworks.ecommerce.listener.GenericoListener;
 
@@ -37,20 +41,25 @@ import lombok.Setter;
 						 indexes = @Index(name = "idx_nome", columnList = "nome"))
 public class Produto extends EntidadeBaseInteger {
 	
+	@NotBlank
 	@Column(length = 100, nullable = false)	
 	private String nome;
 	
 	@Lob
 	private String descricao;
 	
+	@Positive
 	private BigDecimal preco;
 	
 	@Lob
 	private byte[] imagem;
 	
+	@NotNull
+	@PastOrPresent
 	@Column(name = "data_criacao", updatable = false, length = 6, nullable = false)
 	private LocalDateTime dataCriacao;
-	
+		
+	@PastOrPresent
 	@Column(name = "data_ultima_atualizacao", insertable = false)
 	private LocalDateTime dataUltimaAtualizacao;
 	
