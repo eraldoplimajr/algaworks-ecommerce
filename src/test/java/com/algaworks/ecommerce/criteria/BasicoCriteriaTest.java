@@ -1,5 +1,7 @@
 package com.algaworks.ecommerce.criteria;
 
+import java.util.List;
+
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -11,6 +13,7 @@ import org.junit.Test;
 import com.algaworks.ecommerce.EntityManagerTest;
 import com.algaworks.ecommerce.model.Cliente;
 import com.algaworks.ecommerce.model.Pedido;
+import com.algaworks.ecommerce.model.Produto;
 
 /**
  *
@@ -18,6 +21,21 @@ import com.algaworks.ecommerce.model.Pedido;
  *
  */
 public class BasicoCriteriaTest extends EntityManagerTest {
+	
+	@Test
+	public void retornarTodosOsProdutosExercicio() {
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Produto> criteriaQuery = criteriaBuilder.createQuery(Produto.class);
+		Root<Produto> root = criteriaQuery.from(Produto.class);
+		
+		criteriaQuery.select(root);
+		
+		TypedQuery<Produto> typedQuery = entityManager.createQuery(criteriaQuery);
+		
+		List<Produto> produtos = typedQuery.getResultList();
+		
+		Assert.assertFalse(produtos.isEmpty());		
+	}
 	
 	@Test
 	public void selecionarUmAtributoParaRetorno() {
