@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -24,6 +25,7 @@ import javax.validation.constraints.PastOrPresent;
 import javax.validation.constraints.Positive;
 
 import com.algaworks.ecommerce.listener.GenericoListener;
+import com.algaworks.ecommerce.model.converter.BooleanToSimNaoConverter;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -53,6 +55,11 @@ public class Produto extends EntidadeBaseInteger {
 	
 	@Lob
 	private byte[] imagem;
+	
+	@Convert(converter = BooleanToSimNaoConverter.class)
+    @NotNull
+    @Column(length = 3, nullable = false)
+    private Boolean ativo = Boolean.FALSE;
 	
 	@NotNull
 	@PastOrPresent
